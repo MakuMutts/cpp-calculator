@@ -4,24 +4,21 @@
 #include <cmath>
 #include "calculator.h"
 
-using Number = double;
-
 bool ReadNumber(Number& result){
-    if(std::cin.fail()){
+    if(!(std::cin >> result)){
         std::cerr << "Error: Numeric operand expected" << std::endl;
-        return 0;
+        return false;
     }
     else{
         return result;
     }
-    return -1;
+    return true;
 }
 
 bool RunCalculatorCycle(){
     Number result;
-    std::cin >> result;
     if(!ReadNumber(result)){
-        return 0;
+        return false;
     }
     else {
         Number Memory = 0;
@@ -127,5 +124,5 @@ bool RunCalculatorCycle(){
 
         } 
     }
-    return 0;
+    return false;
 }            
