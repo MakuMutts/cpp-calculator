@@ -1,128 +1,61 @@
 
-#include <iostream>
-#include <string>
-#include <cmath>
 #include "calculator.h"
 
-bool ReadNumber(Number& result){
-    if(!(std::cin >> result)){
-        std::cerr << "Error: Numeric operand expected" << std::endl;
-        return false;
-    }
-    else{
-        return result;
-    }
-    return true;
+#include <cmath>
+
+
+
+#include <string>
+using Number = double;
+
+void Calculator::Set(Number n){
+    number_ = n;
 }
 
-bool RunCalculatorCycle(){
-    Number result;
-    if(!ReadNumber(result)){
-        return false;
-    }
-    else {
-        Number Memory = 0;
-        bool is_memory = false;
-        
-        for(int i = 0; i <= 1000; ++i){
-                std::string sign;
-                std::cin >> sign;
-            
-                if(sign =="+"){
-                    Number the_number_read;
-                    std::cin >> the_number_read;
-                    if(std::cin.fail()){
-                        std::cerr << "Error: Numeric operand expected" << std::endl;
-                        break;
-                    }
-                    else{
-                        result += the_number_read;}
-                }
-            
-                else if(sign =="-"){
-                    Number the_number_read;
-                    std::cin >> the_number_read;
-                    if(std::cin.fail()){
-                        std::cerr << "Error: Unknown token " << std::endl;
-                        break;
-                    }
-                    else{
-                        result -= the_number_read;}
-                }
-            
-                else if(sign =="*"){
-                    Number the_number_read;
-                    std::cin >> the_number_read;
-                    if(std::cin.fail()){
-                        std::cerr << "Error: Unknown token " << std::endl;
-                        break;
-                    }
-                    else{
-                        result *= the_number_read;}
-                }
-            
-                else if(sign =="/"){
-                    Number the_number_read;
-                    std::cin >> the_number_read;
-                    if(std::cin.fail()){
-                        std::cerr << "Error: Unknown token " << std::endl;
-                        break;
-                    }
-                    else{
-                        result /= the_number_read;}
-                }
-            
-                else if(sign =="**"){
-                    Number the_number_read;
-                    std::cin >> the_number_read;
-                    if(std::cin.fail()){
-                        std::cerr << "Error: Unknown token " << std::endl;
-                        break;
-                    }
-                    else{
-                        result = pow(result,the_number_read);}
-                }
-            
-                else if(sign == "="){
-                    std::cout << result << std::endl;
-                }
-            
-                else if(sign ==":"){
-                    Number the_number_read;
-                    std::cin >> the_number_read;
-                    if(std::cin.fail()){
-                        std::cerr << "Error: Unknown token " << std::endl;
-                        break;
-                    }
-                    else{
-                        result = the_number_read;}
-                }
-            
-                else if(sign =="c"){
-                    result = 0;
-                }
-            
-                else if(sign =="q"){
-                    break;
-                }
-                else if(sign == "s"){
-                    Memory = result;
-                    is_memory = true;
-                }
-                else if(sign == "l"){
-                    if(is_memory){
-                          result = Memory;
-                    } else {
-                        std::cerr << "Error: Memory is empty" << std::endl;
-                        break;
-                    }
-                }
-                else {
-                    std::cerr << "Error: Unknown token " << sign << std::endl;
-                    break;
-                }
+Number Calculator::GetNumber() const{
+    return number_;
+}
 
-        } 
+void Calculator::Add(Number n){
+    number_ += n;
+}
+
+
+void Calculator::Sub(Number n){
+    number_ -= n;
+}
+
+void Calculator::Div(Number n){
+    number_ /= n;
+}
+
+void Calculator::Mul(Number n){
+    number_ *= n;
+}
+
+void Calculator::Pow(Number n){
+    number_ = pow(number_,n);
+}
+
+void Calculator::Save(){
+    memory = number_;
+    memory_ = true;
+}
+
+void Calculator::Load(){
+    if(memory_){
+        number_ = memory;
+    }
+
+}
+
+bool Calculator::HasMem() const{
+    if(memory_){
+        return true;
     }
     return false;
-}            
+}
+
+std::string Calculator::GetNumberRepr() const{
+    return std::to_string(number_);
+}
