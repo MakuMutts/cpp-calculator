@@ -9,33 +9,34 @@ MainWindow::MainWindow(QWidget* parent, Calculator calculator)
     ui->l_result->setText("0");
     ui->l_memory->setText("");
     ui->l_formula->setText("");
-    connect(ui->btn_0,SIGNAL(clicked()),this,SLOT(digits_numbers()));
-    connect(ui->btn_1,SIGNAL(clicked()),this,SLOT(digits_numbers()));
-    connect(ui->btn_2,SIGNAL(clicked()),this,SLOT(digits_numbers()));
-    connect(ui->btn_3,SIGNAL(clicked()),this,SLOT(digits_numbers()));
-    connect(ui->btn_4,SIGNAL(clicked()),this,SLOT(digits_numbers()));
-    connect(ui->btn_5,SIGNAL(clicked()),this,SLOT(digits_numbers()));
-    connect(ui->btn_6,SIGNAL(clicked()),this,SLOT(digits_numbers()));
-    connect(ui->btn_7,SIGNAL(clicked()),this,SLOT(digits_numbers()));
-    connect(ui->btn_8,SIGNAL(clicked()),this,SLOT(digits_numbers()));
-    connect(ui->btn_9,SIGNAL(clicked()),this,SLOT(digits_numbers()));
 
-    connect(ui->btn_addition,SIGNAL(clicked()),this,SLOT(Addition()));
-    connect(ui->btn_substruction,SIGNAL(clicked()),this,SLOT(Substraction()));
-    connect(ui->btn_multiplicate,SIGNAL(clicked()),this,SLOT(Multiplication()));
-    connect(ui->btn_division,SIGNAL(clicked()),this,SLOT(Division()));
-    connect(ui->btn_power,SIGNAL(clicked()),this,SLOT(Power()));
+    connect(ui->btn_0,&QPushButton::clicked,this, &MainWindow::digits_numbers);
+    connect(ui->btn_1,&QPushButton::clicked,this,&MainWindow::digits_numbers);
+    connect(ui->btn_2,&QPushButton::clicked,this,&MainWindow::digits_numbers);
+    connect(ui->btn_3,&QPushButton::clicked,this,&MainWindow::digits_numbers);
+    connect(ui->btn_4,&QPushButton::clicked,this,&MainWindow::digits_numbers);
+    connect(ui->btn_5,&QPushButton::clicked,this,&MainWindow::digits_numbers);
+    connect(ui->btn_6,&QPushButton::clicked,this,&MainWindow::digits_numbers);
+    connect(ui->btn_7,&QPushButton::clicked,this,&MainWindow::digits_numbers);
+    connect(ui->btn_8,&QPushButton::clicked,this,&MainWindow::digits_numbers);
+    connect(ui->btn_9,&QPushButton::clicked,this,&MainWindow::digits_numbers);
 
-    connect(ui->btn_result,SIGNAL(clicked()),this,SLOT(Result()));
+    connect(ui->btn_addition,&QPushButton::clicked,this,&MainWindow::Addition);
+    connect(ui->btn_substruction,&QPushButton::clicked,this,&MainWindow::Substraction);
+    connect(ui->btn_multiplicate,&QPushButton::clicked,this,&MainWindow::Multiplication);
+    connect(ui->btn_division,&QPushButton::clicked,this,&MainWindow::Division);
+    connect(ui->btn_power,&QPushButton::clicked,this,&MainWindow::Power);
 
-    connect(ui->btn_memory_clear,SIGNAL(clicked()),this,SLOT(MemClear()));
-    connect(ui->btn_memory_remember,SIGNAL(clicked()),this,SLOT(MemRemember()));
-    connect(ui->btn_memory_store,SIGNAL(clicked()),this,SLOT(MemStore()));
+    connect(ui->btn_result,&QPushButton::clicked,this,&MainWindow::Result);
 
-    connect(ui->btn_change_sign,SIGNAL(clicked()),this,SLOT(BtnChangeSign()));
-    connect(ui->btn_delimeter,SIGNAL(clicked()),this,SLOT(BtnDelimeter()));
-    connect(ui->btn_clear,SIGNAL(clicked()),this,SLOT(BtnClear()));
-    connect(ui->btn_delete,SIGNAL(clicked()),this,SLOT(BtnDelete()));
+    connect(ui->btn_memory_clear,&QPushButton::clicked,this,&MainWindow::MemClear);
+    connect(ui->btn_memory_remember,&QPushButton::clicked,this,&MainWindow::MemRemember);
+    connect(ui->btn_memory_store,&QPushButton::clicked,this,&MainWindow::MemStore);
+
+    connect(ui->btn_change_sign,&QPushButton::clicked,this,&MainWindow::BtnChangeSign);
+    connect(ui->btn_delimeter,&QPushButton::clicked,this,&MainWindow::BtnDelimeter);
+    connect(ui->btn_clear,&QPushButton::clicked,this,&MainWindow::BtnClear);
+    connect(ui->btn_delete,&QPushButton::clicked,this,&MainWindow::BtnDelete);
 
 }
 
@@ -104,15 +105,15 @@ void MainWindow::BtnDelete(){
 
 
 
-void MainWindow::InputNumber(QString number) {
-    if (new_number_) {
+void MainWindow::InputNumber(const QString &number) {
+    if (new_number_ && number != '0') {
         input_number_ = number;
         ui->l_result->setText(input_number_);
         new_number_ = false;
         return;
     };
 
-    if (input_number_.size() == 0 && number == '0')
+    if (input_number_.size() == 1 && number == '0')
         return;
 
     input_number_.push_back(number);
@@ -159,7 +160,7 @@ void MainWindow::InputOperation(OperationType operation){
 
 }
 
-void MainWindow::CalculateResult(double right_operand) {
+void MainWindow::CalculateResult(Number right_operand) {
 
     if(current_operation_ == OperationType::ADDITION){
         calculator_.Add(right_operand);
@@ -246,8 +247,8 @@ void MainWindow::Delimeter() {
 }
 
 void MainWindow::ShowResult() {
-    double left_operand = active_number_;
-    double right_operand = input_number_.toDouble();
+    Number left_operand = active_number_;
+    Number right_operand = input_number_.toDouble();
     QString formula;
     QString output = "%1 %2 %3 =";
     if (current_operation_ == OperationType::NO_OPERATION)

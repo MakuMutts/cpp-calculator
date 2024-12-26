@@ -10,7 +10,6 @@ class MainWindow;
 }
 QT_END_NAMESPACE
 
-
 enum class OperationType {
     NO_OPERATION,
     ADDITION,
@@ -49,18 +48,18 @@ private slots:
 
 
 private:
-    double memory_cell_;
-    QString input_number_;
-    double active_number_;
+    Number memory_cell_ = 0;
+    QString input_number_ = "";
+    Number active_number_ = 0;
     Calculator calculator_;
     bool new_number_ = true;
     bool delimeter_ = false;
     bool memory_saved_ = false;
     OperationType current_operation_ = OperationType::NO_OPERATION;
-    void InputNumber(QString  number);
+    void InputNumber(const QString &number);
     QString OperationSign(OperationType operation);
     void InputOperation(OperationType operation);
-    void CalculateResult(double right_operand);
+    void CalculateResult(Number right_operand);
     void ShowResult();
     void MemoryClear();
     void MemoryStore();
