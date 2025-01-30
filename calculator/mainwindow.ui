@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>369</width>
+    <width>371</width>
     <height>669</height>
    </rect>
   </property>
@@ -304,7 +304,7 @@
      </widget>
     </item>
     <item row="8" column="0">
-     <widget class="QPushButton" name="btn_delimeter">
+     <widget class="QPushButton" name="tb_extra">
       <property name="maximumSize">
        <size>
         <width>16777215</width>
@@ -425,6 +425,45 @@
       </property>
      </widget>
     </item>
+    <item row="0" column="0">
+     <widget class="QComboBox" name="cmb_controller">
+      <item>
+       <property name="text">
+        <string>double</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>float</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>uint8_t</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>int</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>int64_t</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>size_t</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Rational</string>
+       </property>
+      </item>
+     </widget>
+    </item>
    </layout>
   </widget>
  </widget>
@@ -448,7 +487,7 @@
   <tabstop>btn_2</tabstop>
   <tabstop>btn_3</tabstop>
   <tabstop>btn_addition</tabstop>
-  <tabstop>btn_delimeter</tabstop>
+  <tabstop>tb_extra</tabstop>
   <tabstop>btn_0</tabstop>
   <tabstop>btn_delete</tabstop>
   <tabstop>btn_result</tabstop>
